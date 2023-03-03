@@ -28,8 +28,9 @@ const Container = styled.div`
 `;
 
 const SliderContainer = styled.div`
-  column-gap: 5%;
+  column-gap: 15%;
   display: none;
+  margin: 5px;
 
   @media (min-width: 768px) {
     display: flex;
@@ -52,6 +53,8 @@ const Label = styled.label`
   align-items: center;
   flex-grow: 1;
   column-gap: 10px;
+  font-weight: bold;
+  padding: 1px;
 
   & > div {
     flex: 1;
@@ -88,7 +91,7 @@ export function Dimensions({ rows, cols, resetGrid, setRows, setCols }) {
     if (cols * totalCellWidth > width - cellWidth) {
       setCols(Math.floor((width - cellWidth) / totalCellWidth));
       toast.warning("Max screen dimension set", {
-        toastId: 1,   // just an id to prevent duplicates
+        toastId: 1, // just an id to prevent duplicates
       });
     }
 
@@ -96,7 +99,7 @@ export function Dimensions({ rows, cols, resetGrid, setRows, setCols }) {
     if (rows * totalCellWidth > height - topHeight) {
       setRows(Math.floor((height - topHeight) / (cellWidth + cellGap)));
       toast.warning("Max screen dimension set", {
-        toastId: 1,   // just an id to prevent duplicates
+        toastId: 1, // just an id to prevent duplicates
       });
     }
     resetGrid();
@@ -107,7 +110,15 @@ export function Dimensions({ rows, cols, resetGrid, setRows, setCols }) {
       <SliderContainer>
         <Label>
           Rows
-          <Slider min={minRows} max={maxRows} value={rows} onChange={setRows} handle={handle} />
+          <Slider
+            min={minRows}
+            max={maxRows}
+            value={rows}
+            onChange={setRows}
+            handle={handle}
+            // size="small"
+            // color="secondary"
+          />
         </Label>
 
         <Label>

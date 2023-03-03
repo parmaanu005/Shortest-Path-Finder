@@ -2,8 +2,6 @@ import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import styled from "@emotion/styled";
 import "react-toastify/dist/ReactToastify.css";
-
-import { AiFillGithub } from "react-icons/ai";
 import { Dimensions } from "./components/Dimensions";
 import { Grid } from "./components/Grid";
 import { Controls } from "./components/Controls";
@@ -13,12 +11,13 @@ import { generateGrid } from "./common/helper";
 import { cellType, wallType, entryType, exitType } from "./common/config";
 
 const Title = styled.h2`
-  margin-top: 5px;
+  margin: 20px 0px 10px 0px;
   text-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 10px;
+  column-gap: 20px;
+  font-size: 35px;
 `;
 
 const Main = styled.main`
@@ -26,9 +25,10 @@ const Main = styled.main`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin: 5px 0px;
 `;
 
-// Opacity is used to hide the toast between screen sizes to stop duplication
+// Opacity to hide toast between screen sizes to stop duplication
 const ToastContainerWeb = styled(ToastContainer)`
   opacity: 0;
   @media (min-width: 768px) {
@@ -54,8 +54,8 @@ function hasMatch(ref, x, y) {
 }
 
 export function App() {
-  const [rows, setRows] = useState(20);
-  const [cols, setCols] = useState(55);
+  const [rows, setRows] = useState(12);
+  const [cols, setCols] = useState(24);
   const [grid, setGrid] = useState(generateGrid(rows, cols));
   const [clickType, setClickType] = useState(1);
   const isInProgress = useRef(false);
@@ -94,14 +94,20 @@ export function App() {
     }
 
     isInProgress.current = true;
-    await startBreadthFirstSearchAlgo(grid, setGrid, entry.current, exit.current, isInProgress);
+    await startBreadthFirstSearchAlgo(
+      grid,
+      setGrid,
+      entry.current,
+      exit.current,
+      isInProgress
+    );
   }
 
   function setGridCell(x, y, type = clickType) {
     const newGrid = [...grid];
     newGrid[x][y] = type;
 
-    // if click is wall or cell, reset if that cell was entry or exit
+    // chnage cell like entry or exit
     if (type === cellType || type === wallType) {
       if (hasMatch(entry, x, y)) {
         setCell(entry);
@@ -131,17 +137,16 @@ export function App() {
 
   return (
     <>
-      <Title>
-        Shortest Path Finder
-        <a href="https://github.com/sadanandpai/shortest-path-finder">
-          <AiFillGithub />
-        </a>
-      </Title>
+      <Title>SHORTEST PATH FINDER</Title>
       <Dimensions {...appData} />
       <Main>
         <Controls {...appData} />
         <Grid {...appData} />
-        <ToastContainerWeb autoClose={3000} pauseOnFocusLoss={false} toastId={3} />
+        <ToastContainerWeb
+          autoClose={3000}
+          pauseOnFocusLoss={false}
+          toastId={3}
+        />
         <ToastContainerMobile
           position="bottom-center"
           pauseOnFocusLoss={false}

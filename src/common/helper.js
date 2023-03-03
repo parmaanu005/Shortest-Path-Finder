@@ -2,8 +2,8 @@ function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 
-export function delay(time){
-  return new Promise((resolve) => setTimeout(resolve, time))
+export function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 export function generateGrid(rows, cols, value) {
@@ -22,11 +22,11 @@ export function randomMazeGenerator(rows, cols) {
   });
 
   const entry = { x: getRandom(rows), y: getRandom(cols) };
-  const exit = {x: -1, y: -1};
-  do{
+  const exit = { x: -1, y: -1 };
+  do {
     exit.x = getRandom(rows);
     exit.y = getRandom(cols);
-  }while(exit.x === entry.x && exit.y === entry.y);
+  } while (exit.x === entry.x && exit.y === entry.y);
 
   grid[entry.x][entry.y] = 2;
   grid[exit.x][exit.y] = 3;

@@ -13,19 +13,21 @@ import { cellType, wallType, entryType, exitType } from "../common/config";
 import { randomMazeGenerator } from "../common/helper";
 
 const buttonsColorMap = new Map([
-  [wallType, "red"],
-  [entryType, "blue"],
-  [exitType, "green"],
+  [wallType, "secondary"],
+  [entryType, "violet"],
+  [exitType, "red"],
+  [cellType, "teal"],
 ]);
 
 const Row = styled.div`
-  margin: 10px 0;
+  margin-top: 10px;
 `;
 
 const WebButtons = styled.div`
   width: 90%;
   margin: auto;
-  display: none;
+  display: flex;
+  padding-bottom: 20px;
 
   .web-icons {
     display: flex;
@@ -40,6 +42,8 @@ const WebButtons = styled.div`
     justify-content: center;
 
     button {
+      font-size: 15px;
+      font-weight: bold;
       padding: 6px 12px;
     }
   }
@@ -100,6 +104,7 @@ export function Controls({
         disabled={isInProgress.current}
         idleText={text}
         outline={clickType !== type}
+        size="normal"
       />
     );
   };
@@ -114,11 +119,27 @@ export function Controls({
           <MyReactiveButton text="Clear" type={cellType} />
         </Section>
         <Section>
-          <ReactiveButton onClick={startBFS} disabled={isDisabled} idleText="Search Path" />
+          <ReactiveButton
+            onClick={startBFS}
+            disabled={isDisabled}
+            idleText="Search Path"
+            color="primary"
+            size="large"
+          />
         </Section>
         <Section>
-          <ReactiveButton onClick={resetGrid} idleText="Reset" outline />
-          <ReactiveButton onClick={randomGrid} idleText="Random Maze" outline />
+          <ReactiveButton
+            onClick={resetGrid}
+            idleText="Reset"
+            size="normal"
+            outline
+          />
+          <ReactiveButton
+            onClick={randomGrid}
+            idleText="Random Maze"
+            size="normal"
+            outline
+          />
         </Section>
       </WebButtons>
 
@@ -130,11 +151,23 @@ export function Controls({
           <MyReactiveButton text={<CgTrashEmpty />} type={cellType} />
         </Section>
         <Section>
-          <ReactiveButton onClick={startBFS} disabled={isDisabled} idleText={<BsPlay />} />
+          <ReactiveButton
+            onClick={startBFS}
+            disabled={isDisabled}
+            idleText={<BsPlay />}
+          />
         </Section>
         <Section>
-          <ReactiveButton onClick={resetGrid} idleText={<GrPowerReset />} outline />
-          <ReactiveButton onClick={randomGrid} idleText={<FaRandom />} outline />
+          <ReactiveButton
+            onClick={resetGrid}
+            idleText={<GrPowerReset />}
+            outline
+          />
+          <ReactiveButton
+            onClick={randomGrid}
+            idleText={<FaRandom />}
+            outline
+          />
         </Section>
       </MobileButtons>
     </Row>

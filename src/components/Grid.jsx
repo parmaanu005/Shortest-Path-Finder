@@ -54,7 +54,9 @@ export function Grid({ grid, setGridCell, clickType, isInProgress }) {
       cols={grid[0].length}
     >
       {grid.map((row, i) =>
-        row.map((cell, j) => <Box key={i + ":" + j} i={i} j={j} clickType={cell} />)
+        row.map((cell, j) => (
+          <Box key={i + ":" + j} i={i} j={j} clickType={cell} />
+        ))
       )}
     </GridContainer>
   );

@@ -93,7 +93,13 @@ async function tracePath(entry, exit, parents, grid, setGrid, isInProgress) {
 }
 
 // The Breadth First Search Algorithm (Use different alogirthm if needed)
-export async function startBreadthFirstSearchAlgo(grid, setGrid, entry, exit, isInProgress) {
+export async function startBreadthFirstSearchAlgo(
+  grid,
+  setGrid,
+  entry,
+  exit,
+  isInProgress
+) {
   const rows = grid.length;
   const cols = grid[0].length;
   const visited = generateGrid(rows, cols, false); // initalize visited arrays
@@ -103,7 +109,12 @@ export async function startBreadthFirstSearchAlgo(grid, setGrid, entry, exit, is
   visited[entry.x][entry.y] = true; // mark it as visited
 
   // get the function for reuse with coordinates
-  const addToQueueIfAllowed = getAddToQueueIfAllowedFunction(grid, parents, visited, queue);
+  const addToQueueIfAllowed = getAddToQueueIfAllowedFunction(
+    grid,
+    parents,
+    visited,
+    queue
+  );
 
   let isPathFound = false;
   outerLoop: while (queue.length) {
@@ -142,7 +153,14 @@ export async function startBreadthFirstSearchAlgo(grid, setGrid, entry, exit, is
   if (isPathFound && isInProgress.current) {
     // trace the path only if present
     toast.success("Path found!!! 😃");
-    const pathLength = await tracePath(entry, exit, parents, grid, setGrid, isInProgress);
+    const pathLength = await tracePath(
+      entry,
+      exit,
+      parents,
+      grid,
+      setGrid,
+      isInProgress
+    );
 
     if (isInProgress.current) {
       toast("Shortest path length is " + (pathLength + 1));
